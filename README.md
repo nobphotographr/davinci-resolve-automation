@@ -17,6 +17,32 @@ This repository contains practical Python scripts and documentation for automati
 - **Color Version Management**: Programmatically manage color versions
 - **Workflow Automation**: Streamline repetitive color grading tasks
 
+## ✨ Key Features
+
+### 🎨 Color Grading Automation
+- **LUT Management**: Install, apply, and compare LUTs across clips
+- **Batch Grading**: Apply DRX templates, LUTs, and CDL to multiple clips
+- **Color Versions**: Create and manage color versions for A/B testing
+- **Flexible Targeting**: Target clips by track, color, or apply to all
+
+### 📊 Timeline & Media Analysis
+- **Timeline Statistics**: Analyze clip counts, duration, LUT usage, node structure
+- **Media Pool Organization**: Auto-organize by resolution, codec, or custom rules
+- **Tree Visualization**: Visual bin structure display
+- **Search & Filter**: Find clips by name, metadata, or properties
+
+### 🗂️ Project Management
+- **Automated Backups**: Timestamp-based project backups with retention policies
+- **Metadata Management**: Bulk import/export metadata via CSV/JSON
+- **Project Cleanup**: Batch delete test projects
+- **Automated Setup**: Create projects with predefined structures
+
+### 🎬 Render Management
+- **Queue Management**: Add, monitor, and manage render jobs
+- **Built-in Presets**: 7 production-ready presets (ProRes, H.264/H.265, DNxHR)
+- **Progress Monitoring**: Real-time progress with ETA calculation
+- **Batch Rendering**: Queue multiple jobs with different settings
+
 ## 📁 Repository Structure
 
 ```
@@ -123,6 +149,140 @@ python3 Scripts/ColorGrading/lut_comparison.py
 | `media_pool_organizer.py` | Organize media pool, analyze structure, search clips, cleanup |
 | `metadata_manager.py` | Bulk manage, import/export metadata for clips (CSV/JSON) |
 | `project_backup.py` | Automated project backup, restore, and retention management |
+
+## 🎬 Detailed Usage Examples
+
+### LUT Installation & Management
+
+**Install LUTs:**
+```bash
+# Install single LUT
+python3 Scripts/Utilities/lut_installer.py my_lut.cube
+
+# Install multiple LUTs
+python3 Scripts/Utilities/lut_installer.py lut1.cube lut2.cube lut3.cube
+
+# Install with overwrite
+python3 Scripts/Utilities/lut_installer.py --overwrite my_lut.cube
+```
+
+### Timeline Analysis
+
+**Analyze your timeline:**
+```bash
+# Basic statistics
+python3 Scripts/Utilities/timeline_analyzer.py
+
+# Detailed per-clip info
+python3 Scripts/Utilities/timeline_analyzer.py --detailed
+
+# Export to JSON
+python3 Scripts/Utilities/timeline_analyzer.py --json timeline_report.json
+```
+
+### Batch Grading
+
+**Apply grades to multiple clips:**
+```bash
+# Apply DRX to all clips in track 1
+python3 Scripts/ColorGrading/batch_grade_apply.py --drx template.drx --track 1
+
+# Apply LUT to all clips
+python3 Scripts/ColorGrading/batch_grade_apply.py --lut my_lut.cube --node 4 --all
+
+# Apply to orange-colored clips only
+python3 Scripts/ColorGrading/batch_grade_apply.py --lut film.cube --node 4 --color Orange
+
+# Combine DRX and LUT
+python3 Scripts/ColorGrading/batch_grade_apply.py --drx base.drx --lut film.cube --node 4 --all
+```
+
+### Render Queue Management
+
+**Manage rendering:**
+```bash
+# List available presets
+python3 Scripts/Utilities/render_manager.py --list-presets
+
+# Add render job with ProRes preset
+python3 Scripts/Utilities/render_manager.py --add --preset prores422hq --output ~/renders/
+
+# Start rendering with progress monitoring
+python3 Scripts/Utilities/render_manager.py --start --monitor
+
+# View queue status
+python3 Scripts/Utilities/render_manager.py --status
+```
+
+### Media Pool Organization
+
+**Organize your media:**
+```bash
+# Show statistics
+python3 Scripts/Utilities/media_pool_organizer.py --stats
+
+# Display bin structure as tree
+python3 Scripts/Utilities/media_pool_organizer.py --tree
+
+# Auto-organize by resolution
+python3 Scripts/Utilities/media_pool_organizer.py --organize-by resolution
+
+# Auto-organize by codec
+python3 Scripts/Utilities/media_pool_organizer.py --organize-by codec
+
+# Search for clips
+python3 Scripts/Utilities/media_pool_organizer.py --search "interview"
+
+# Clean empty bins (dry-run first)
+python3 Scripts/Utilities/media_pool_organizer.py --clean-empty-bins --dry-run
+python3 Scripts/Utilities/media_pool_organizer.py --clean-empty-bins
+```
+
+### Metadata Management
+
+**Manage clip metadata:**
+```bash
+# List all metadata
+python3 Scripts/Utilities/metadata_manager.py --list
+
+# Export to CSV with properties
+python3 Scripts/Utilities/metadata_manager.py --export metadata.csv --properties
+
+# Import from CSV
+python3 Scripts/Utilities/metadata_manager.py --import metadata.csv
+
+# Set metadata on specific clips
+python3 Scripts/Utilities/metadata_manager.py --set-field "Scene" "101A" --search "interview"
+
+# Find clips by metadata
+python3 Scripts/Utilities/metadata_manager.py --find-by "Scene=101"
+
+# Work with timeline clips
+python3 Scripts/Utilities/metadata_manager.py --timeline --list
+```
+
+### Project Backup
+
+**Backup and restore:**
+```bash
+# Create backup
+python3 Scripts/Utilities/project_backup.py --backup
+
+# Backup with note
+python3 Scripts/Utilities/project_backup.py --backup --note "Before major changes"
+
+# Backup with retention (keep last 5)
+python3 Scripts/Utilities/project_backup.py --backup --keep 5
+
+# List all backups
+python3 Scripts/Utilities/project_backup.py --list
+
+# Clean old backups
+python3 Scripts/Utilities/project_backup.py --clean --keep 10 --dry-run
+
+# Restore from backup
+python3 Scripts/Utilities/project_backup.py --restore MyProject_20250130_143022.drp
+```
 
 ## 💡 Key Concepts
 
