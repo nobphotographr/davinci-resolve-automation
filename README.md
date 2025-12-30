@@ -149,6 +149,7 @@ python3 Scripts/ColorGrading/lut_comparison.py
 | `media_pool_organizer.py` | Organize media pool, analyze structure, search clips, cleanup |
 | `metadata_manager.py` | Bulk manage, import/export metadata for clips (CSV/JSON) |
 | `project_backup.py` | Automated project backup, restore, and retention management |
+| `clip_color_manager.py` | Manage, analyze, and bulk-modify clip colors in timeline/media pool |
 
 ## 🎬 Detailed Usage Examples
 
@@ -282,6 +283,30 @@ python3 Scripts/Utilities/project_backup.py --clean --keep 10 --dry-run
 
 # Restore from backup
 python3 Scripts/Utilities/project_backup.py --restore MyProject_20250130_143022.drp
+```
+
+### Clip Color Management
+
+**Manage clip colors:**
+```bash
+# Show color distribution statistics
+python3 Scripts/Utilities/clip_color_manager.py --stats
+
+# List clips with specific color
+python3 Scripts/Utilities/clip_color_manager.py --list --color Orange
+
+# Set color on clips matching search
+python3 Scripts/Utilities/clip_color_manager.py --set-color Blue --search "interview"
+
+# Clear color from specific clips
+python3 Scripts/Utilities/clip_color_manager.py --clear-color --color Orange
+
+# Clear all colors (dry-run first)
+python3 Scripts/Utilities/clip_color_manager.py --clear-color --dry-run
+
+# Work with timeline clips
+python3 Scripts/Utilities/clip_color_manager.py --timeline --stats
+python3 Scripts/Utilities/clip_color_manager.py --timeline --set-color Purple --search "b-roll"
 ```
 
 ## 💡 Key Concepts

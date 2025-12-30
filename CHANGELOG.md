@@ -7,6 +7,14 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 ## [Unreleased]
 
 ### Added
+- **Clip Color Manager** - Scripts/Utilities/clip_color_manager.py
+  - View color distribution statistics with visual bar charts
+  - List clips filtered by specific color
+  - Bulk set color on clips with search filtering
+  - Clear color from clips (all or specific color)
+  - Dry-run mode for safe testing
+  - Works with both timeline and media pool
+  - Supports all 16 DaVinci Resolve clip colors
 - **Setup Scripts** - Automated installation for all platforms
   - setup.sh - macOS and Linux setup script
   - setup.bat - Windows setup script
