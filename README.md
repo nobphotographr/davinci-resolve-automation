@@ -43,21 +43,55 @@ davinci-resolve-automation/
 - **Python 3.6+**
 - **macOS, Windows, or Linux**
 
-### Installation
+### Quick Start
 
-1. Clone this repository:
+#### Automated Setup (Recommended)
+
+**macOS / Linux:**
 ```bash
 git clone https://github.com/nobphotographr/davinci-resolve-automation.git
 cd davinci-resolve-automation
+chmod +x setup.sh
+./setup.sh
 ```
 
-2. Set up environment variables (macOS):
+**Windows:**
+```cmd
+git clone https://github.com/nobphotographr/davinci-resolve-automation.git
+cd davinci-resolve-automation
+setup.bat
+```
+
+The setup script will:
+- ✅ Detect your platform (macOS/Windows/Linux)
+- ✅ Configure environment variables
+- ✅ Install sample LUTs to DaVinci Resolve directory
+- ✅ Verify Python installation
+- ✅ Test API connection to DaVinci Resolve
+
+#### Manual Setup
+
+If you prefer manual setup:
+
+**macOS:**
 ```bash
 export RESOLVE_SCRIPT_API="/Library/Application Support/Blackmagic Design/DaVinci Resolve/Developer/Scripting"
 export RESOLVE_SCRIPT_LIB="/Applications/DaVinci Resolve/DaVinci Resolve.app/Contents/Libraries/Fusion/fusionscript.so"
 ```
 
-3. Run a sample script:
+**Windows:**
+```cmd
+set RESOLVE_SCRIPT_API=C:\ProgramData\Blackmagic Design\DaVinci Resolve\Support\Developer\Scripting
+set RESOLVE_SCRIPT_LIB=C:\Program Files\Blackmagic Design\DaVinci Resolve\fusionscript.dll
+```
+
+**Linux:**
+```bash
+export RESOLVE_SCRIPT_API="/opt/resolve/Developer/Scripting"
+export RESOLVE_SCRIPT_LIB="/opt/resolve/libs/Fusion/fusionscript.so"
+```
+
+Then run a sample script:
 ```bash
 python3 Scripts/ColorGrading/lut_comparison.py
 ```

@@ -7,6 +7,13 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 ## [Unreleased]
 
 ### Added
+- **Setup Scripts** - Automated installation for all platforms
+  - setup.sh - macOS and Linux setup script
+  - setup.bat - Windows setup script
+  - Automatic environment variable configuration
+  - Sample LUT installation
+  - Python and DaVinci Resolve API verification
+  - Connection test to running DaVinci Resolve instance
 - CONTRIBUTING.md - ナレッジ追加ガイドライン
 - GitHub Issue Template for knowledge additions
 - CHANGELOG.md for tracking changes
@@ -31,7 +38,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
   - 削除前に全プロジェクトリストを表示
   - スキップしたプロジェクト数を集計
   - より詳細な実行結果レポート
-- README.md - Documentation and resources updates
+- README.md - Installation and documentation updates
+  - Added Quick Start section with automated setup instructions
+  - Added platform-specific setup commands (macOS/Windows/Linux)
+  - Reorganized installation flow for better user experience
   - Added Type Safety & Best Practices documentation link
   - Added Recommended Libraries section (pydavinci)
   - Enhanced Community Resources section
