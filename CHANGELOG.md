@@ -10,12 +10,19 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - CONTRIBUTING.md - ナレッジ追加ガイドライン
 - GitHub Issue Template for knowledge additions
 - CHANGELOG.md for tracking changes
+- Advanced_Techniques.md - Community-discovered workarounds
+  - Selected timeline clips workaround (using clip color)
+  - Track iteration patterns
+  - Batch operations on filtered clips
+  - Fusion vs Python API comparison
+  - Credits to hitsugi_yukana's research
 
 ### Improved
 - cleanup_projects.py - プロジェクト一覧表示機能追加
   - 削除前に全プロジェクトリストを表示
   - スキップしたプロジェクト数を集計
   - より詳細な実行結果レポート
+- README.md - Added links to Advanced Techniques and Contributing guides
 
 ## [1.0.0] - 2025-01-XX
 

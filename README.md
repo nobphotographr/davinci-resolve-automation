@@ -113,6 +113,8 @@ Switch between versions in Resolve UI for instant comparison!
 - **[API Reference](Docs/API_Reference.md)** - Complete API documentation
 - **[Best Practices](Docs/Best_Practices.md)** - Proven patterns and strategies
 - **[Limitations](Docs/Limitations.md)** - Known API limitations and workarounds
+- **[Advanced Techniques](Docs/Advanced_Techniques.md)** - Community-discovered workarounds and techniques
+- **[Contributing](Docs/CONTRIBUTING.md)** - How to add knowledge to this repository
 
 ## 🔧 API Capabilities & Limitations
 
