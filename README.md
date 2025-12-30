@@ -121,6 +121,7 @@ python3 Scripts/ColorGrading/lut_comparison.py
 | `timeline_analyzer.py` | Analyze timeline statistics, LUT usage, and clip distribution |
 | `render_manager.py` | Manage render queue, add jobs with presets, monitor progress |
 | `media_pool_organizer.py` | Organize media pool, analyze structure, search clips, cleanup |
+| `metadata_manager.py` | Bulk manage, import/export metadata for clips (CSV/JSON) |
 
 ## 💡 Key Concepts
 

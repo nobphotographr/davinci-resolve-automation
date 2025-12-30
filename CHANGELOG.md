@@ -53,6 +53,14 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
   - Recursive folder traversal (implements Advanced_Techniques pattern)
   - Clean up empty bins with dry-run mode
   - Get-or-create bin pattern for safe folder management
+- **Metadata Manager** - Scripts/Utilities/metadata_manager.py
+  - List metadata for media pool and timeline clips
+  - Export metadata to CSV or JSON with optional properties
+  - Import metadata from CSV files
+  - Bulk set metadata fields with search filtering
+  - Find clips by metadata values
+  - Supports both MediaPoolItem and TimelineItem APIs
+  - Common metadata fields (Scene, Shot, Take, Keywords, etc.)
 - CONTRIBUTING.md - ナレッジ追加ガイドライン
 - GitHub Issue Template for knowledge additions
 - CHANGELOG.md for tracking changes
