@@ -70,6 +70,14 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
   - Restore projects from backup files
   - Default backup location (~/DaVinci_Resolve_Backups)
   - Custom backup directory support
+- **Troubleshooting Guide** - Docs/Troubleshooting.md
+  - Connection issues and solutions
+  - Environment setup problems
+  - Script execution errors
+  - API-specific issues (LUT, metadata, render)
+  - Platform-specific issues (macOS, Windows, Linux)
+  - Performance optimization tips
+  - Quick diagnostic checklist
 - CONTRIBUTING.md - ナレッジ追加ガイドライン
 - GitHub Issue Template for knowledge additions
 - CHANGELOG.md for tracking changes

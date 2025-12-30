@@ -309,6 +309,7 @@ Switch between versions in Resolve UI for instant comparison!
 
 ## 📖 Documentation
 
+- **[Troubleshooting](Docs/Troubleshooting.md)** - Common issues and solutions 🔧
 - **[API Reference](Docs/API_Reference.md)** - Complete API documentation
 - **[Best Practices](Docs/Best_Practices.md)** - Proven patterns and strategies
 - **[Limitations](Docs/Limitations.md)** - Known API limitations and workarounds
