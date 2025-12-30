@@ -45,6 +45,14 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
   - Real-time progress display with ETA calculation
   - Clear completed/failed jobs from queue
   - Custom output directory support
+- **Media Pool Organizer** - Scripts/Utilities/media_pool_organizer.py
+  - Comprehensive media pool statistics (clips, bins, codecs, resolutions)
+  - Visual tree display of bin structure
+  - Auto-organize clips by resolution or codec
+  - Search clips by name across all bins
+  - Recursive folder traversal (implements Advanced_Techniques pattern)
+  - Clean up empty bins with dry-run mode
+  - Get-or-create bin pattern for safe folder management
 - CONTRIBUTING.md - ナレッジ追加ガイドライン
 - GitHub Issue Template for knowledge additions
 - CHANGELOG.md for tracking changes
