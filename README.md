@@ -62,6 +62,17 @@ This repository contains practical Python scripts and documentation for automati
 - **Render Manager**: 7 production-ready presets with progress monitoring
 - **Project Backup**: Automated backup, restore, and retention management
 
+### 📱 Interactive Workflows (1 script)
+- **iPhone Blackmagic Camera Workflow**: Fully automated, step-by-step interactive workflow
+  - Auto-detects media from external drives
+  - Creates project with proper settings (resolution, fps)
+  - Imports and organizes media into bins (by time/resolution)
+  - Applies color space transformations (Blackmagic Log → Rec.709)
+  - 3 color presets: Natural (YouTube/Vlog), Cinematic (Teal & Orange), Vivid (Instagram/SNS)
+  - Timeline creation modes: empty, chronological, or skip
+  - Proxy generation setup with quality options
+  - Perfect for beginners with detailed explanations at each step
+
 ## 📁 Repository Structure
 
 ```
@@ -69,7 +80,8 @@ davinci-resolve-automation/
 ├── Scripts/
 │   ├── ColorGrading/          # Color grading automation scripts
 │   ├── ProjectManagement/     # Project setup and management
-│   └── Utilities/             # Helper utilities
+│   ├── Utilities/             # Helper utilities
+│   └── Workflows/             # Interactive workflow scripts
 ├── Templates/
 │   └── DRX/                   # DaVinci Resolve Grade Exchange files
 ├── Docs/
@@ -194,6 +206,22 @@ python3 Scripts/ColorGrading/lut_comparison.py
 | `timeline_analyzer.py` | Analyze timeline statistics, LUT usage, clip distribution |
 | `timeline_comparison.py` | Compare two timelines and identify differences |
 | `timeline_export_import.py` | Export/import timeline data with clip information |
+
+### 📱 Workflows (1 script)
+
+| Script | Description |
+|--------|-------------|
+| `iphone_bmc_interactive.py` | Interactive iPhone Blackmagic Camera workflow with full automation |
+
+**iPhone BMC Workflow Features:**
+- 7-step interactive guide with detailed explanations
+- Auto-detects media from external drives
+- Creates project with proper settings (resolution, fps)
+- Imports and organizes media into bins (by time/resolution)
+- Applies color space transformations (Blackmagic Log → Rec.709)
+- 3 color presets: Natural (YouTube/Vlog), Cinematic (Teal & Orange), Vivid (Instagram/SNS)
+- Timeline creation modes: empty, chronological, or skip
+- Proxy generation setup with quality options
 
 ## 🎬 Detailed Usage Examples
 
@@ -469,6 +497,38 @@ python3 Scripts/Utilities/proxy_workflow_manager.py --check-missing --all
 # Generate proxy report
 python3 Scripts/Utilities/proxy_workflow_manager.py --report proxies.csv
 ```
+
+### iPhone Blackmagic Camera Workflow
+
+**Interactive iPhone BMC workflow:**
+```bash
+# Run the interactive workflow assistant
+python3 Scripts/Workflows/iphone_bmc_interactive.py
+```
+
+**What the workflow does:**
+1. **Auto-detects media** from external drives (DCIM, PRIVATE, Blackmagic folders)
+2. **Creates project** with your chosen resolution (1080p/4K/portrait) and fps (24/30/60)
+3. **Imports media** and organizes into bins by:
+   - Time of day (Morning/Afternoon/Evening)
+   - Resolution (4K/1080p/Other)
+   - All in root folder
+4. **Applies color settings**:
+   - Natural: Blackmagic Log → Rec.709, perfect for YouTube/Vlogs
+   - Cinematic: Teal & Orange look with enhanced contrast
+   - Vivid: High saturation for Instagram/SNS
+   - Custom: Use your own LUT file
+5. **Creates timeline**:
+   - Empty timeline for manual editing
+   - Chronological timeline with all clips sorted
+   - Skip to create timeline later
+6. **Sets up proxies** with half or quarter resolution options
+
+**Perfect for:**
+- iPhone Blackmagic Camera users (ProRes, Log recording)
+- Beginners who want guided workflow
+- Quick project setup with proper color management
+- Vertical video creators (Instagram, TikTok)
 
 ## 💡 Key Concepts
 
