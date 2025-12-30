@@ -116,6 +116,52 @@ if not project:
     sys.exit(1)
 ```
 
+### Project List Management
+
+Display project list before bulk operations:
+
+```python
+# Navigate to root folder
+project_manager.GotoRootFolder()
+
+# Get project list
+project_list = project_manager.GetProjectListInCurrentFolder()
+print(f"Total projects: {len(project_list)}")
+
+# Display all projects
+for project_name in project_list:
+    print(f"  - {project_name}")
+```
+
+**Benefits**:
+- Verify before destructive operations
+- Understand current state
+- Prevent accidental deletions
+
+### Batch Deletion with Reporting
+
+Track deletion results separately:
+
+```python
+deleted_count = 0
+failed_count = 0
+skipped_count = 0
+
+for project_name in project_list:
+    if should_delete(project_name):
+        success = project_manager.DeleteProject(project_name)
+        if success:
+            deleted_count += 1
+        else:
+            failed_count += 1
+    else:
+        skipped_count += 1
+
+print(f"Deleted: {deleted_count}")
+print(f"Failed: {failed_count}")
+print(f"Skipped: {skipped_count}")
+```
+
 ## Performance Optimization
 
 ### Batch Operations
