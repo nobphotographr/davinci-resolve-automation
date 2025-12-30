@@ -19,29 +19,48 @@ This repository contains practical Python scripts and documentation for automati
 
 ## ✨ Key Features
 
-### 🎨 Color Grading Automation
-- **LUT Management**: Install, apply, and compare LUTs across clips
+### 🎨 Color Grading Automation (11 scripts)
+- **Professional Look Presets**: 8 cinematic looks (Netflix, ARRI, Teal & Orange, Film Stock)
+- **LUT Management**: Install, apply, compare, and export/import LUTs
+- **CDL Interchange**: Industry-standard ASC CDL export/import for Baselight, Nuke, etc.
 - **Batch Grading**: Apply DRX templates, LUTs, and CDL to multiple clips
+- **Color Temperature**: 7 white balance presets from tungsten to blue hour
+- **Exposure Matching**: Lift/gamma/gain adjustment across clips
+- **Saturation Control**: 5 presets from flat to vivid
+- **Contrast Management**: S-curve presets (flat, natural, cinematic, high)
+- **Grade Copy/Paste**: Copy grades between clips with versioning
 - **Color Versions**: Create and manage color versions for A/B testing
 - **Flexible Targeting**: Target clips by track, color, or apply to all
 
-### 📊 Timeline & Media Analysis
+### 📊 Timeline & Media Analysis (8 scripts)
+- **Timeline Comparison**: Compare two timelines and identify differences
+- **Shot List Generation**: Export to CSV/JSON/Markdown with timecodes
 - **Timeline Statistics**: Analyze clip counts, duration, LUT usage, node structure
-- **Media Pool Organization**: Auto-organize by resolution, codec, or custom rules
-- **Tree Visualization**: Visual bin structure display
-- **Search & Filter**: Find clips by name, metadata, or properties
+- **Node Structure Analysis**: Document and analyze color node structures
+- **Media Pool Organization**: Auto-organize by resolution, codec, smart bin patterns
+- **Marker Management**: Bulk add, export, import, and analyze markers
+- **Timeline Import/Export**: Backup and restore timeline data
+- **Batch Timeline Creation**: Create multiple timelines with automation
 
-### 🗂️ Project Management
+### 🗂️ Project Management & Delivery (4 scripts)
+- **Deliverables Checklist**: Generate checklists for broadcast, web, cinema, archive
 - **Automated Backups**: Timestamp-based project backups with retention policies
 - **Metadata Management**: Bulk import/export metadata via CSV/JSON
+- **Conform Assistant**: Timeline matching, missing media detection, rename detection
+- **Shot List Generation**: Professional shot lists for production tracking
 - **Project Cleanup**: Batch delete test projects
 - **Automated Setup**: Create projects with predefined structures
 
-### 🎬 Render Management
-- **Queue Management**: Add, monitor, and manage render jobs
-- **Built-in Presets**: 7 production-ready presets (ProRes, H.264/H.265, DNxHR)
-- **Progress Monitoring**: Real-time progress with ETA calculation
-- **Batch Rendering**: Queue multiple jobs with different settings
+### 🎬 Workflow Tools (12 scripts)
+- **Audio Sync Helper**: Multi-camera sync with scene/shot grouping
+- **Proxy Management**: Offline/online workflow with proxy status checking
+- **Speed Ramp Manager**: 7 speed presets from quarter-speed to hyper-speed
+- **Stabilization Manager**: 5 stabilization presets with workflow guidance
+- **Text/Title Generation**: Templates for slates, lower thirds, watermarks
+- **Batch Clip Renamer**: 5 rename modes (prefix, suffix, regex, sequential, metadata)
+- **Clip Color Manager**: Analyze, manage, and bulk-modify clip colors
+- **Render Manager**: 7 production-ready presets with progress monitoring
+- **Project Backup**: Automated backup, restore, and retention management
 
 ## 📁 Repository Structure
 
@@ -124,32 +143,57 @@ python3 Scripts/ColorGrading/lut_comparison.py
 
 ## 📚 Available Scripts
 
-### Color Grading
+**Total: 35 Scripts** across Color Grading, Project Management, and Utilities
+
+### 🎨 Color Grading (11 scripts)
 
 | Script | Description |
 |--------|-------------|
-| `lut_comparison.py` | Create color versions for easy LUT A/B comparison |
 | `apply_drx_template.py` | Apply DRX node templates to clips |
 | `batch_grade_apply.py` | Batch apply DRX/LUT/CDL to multiple clips with flexible targeting |
+| `cdl_export_import.py` | Export/import ASC CDL (Color Decision List) for industry interchange |
+| `color_temperature_adjuster.py` | Batch adjust white balance with 7 temperature presets |
+| `contrast_manager.py` | Manage contrast with S-curve presets (flat, natural, cinematic, high) |
+| `exposure_matcher.py` | Match exposure across clips using lift/gamma/gain |
+| `grade_copy_paste.py` | Copy/paste color grades between clips with versioning |
+| `lut_comparison.py` | Create color versions for easy LUT A/B comparison |
+| `lut_comparison_generator.py` | Generate side-by-side LUT comparison timeline |
+| `quick_look_presets.py` | Apply professional looks (Netflix, ARRI, Teal & Orange, Film Stock) |
+| `saturation_controller.py` | Batch saturation control with 5 presets (flat to vivid) |
 
-### Project Management
+### 🗂️ Project Management (4 scripts)
 
 | Script | Description |
 |--------|-------------|
 | `auto_project_setup.py` | Create projects with automated settings |
-| `cleanup_test_projects.py` | Remove test projects in bulk |
+| `cleanup_projects.py` | Remove test projects in bulk |
+| `deliverables_checklist.py` | Generate delivery checklists (broadcast, web, cinema, archive) |
+| `shot_list_generator.py` | Generate shot lists in CSV/JSON/Markdown with timecodes |
 
-### Utilities
+### 🛠️ Utilities (20 scripts)
 
 | Script | Description |
 |--------|-------------|
+| `audio_sync_helper.py` | Multi-camera sync assistance with scene/shot grouping |
+| `batch_clip_renamer.py` | Rename clips with 5 modes (prefix, suffix, regex, sequential, metadata) |
+| `batch_speed_ramp.py` | Manage speed ramps with 7 presets (quarter-speed to hyper-speed) |
+| `batch_stabilization_manager.py` | Stabilization management with 5 presets (light to strong) |
+| `batch_text_title_generator.py` | Text/title generation assistant (slates, lower thirds, watermarks) |
+| `batch_timeline_creator.py` | Create multiple timelines with automated settings |
+| `clip_color_manager.py` | Manage, analyze, and bulk-modify clip colors |
+| `conform_assistant.py` | Timeline comparison, missing media detection, conform verification |
 | `lut_installer.py` | Install custom LUTs to Resolve directory with auto-refresh |
-| `timeline_analyzer.py` | Analyze timeline statistics, LUT usage, and clip distribution |
-| `render_manager.py` | Manage render queue, add jobs with presets, monitor progress |
-| `media_pool_organizer.py` | Organize media pool, analyze structure, search clips, cleanup |
-| `metadata_manager.py` | Bulk manage, import/export metadata for clips (CSV/JSON) |
+| `marker_manager.py` | Bulk marker management (add, export, import, analyze) |
+| `media_pool_organizer.py` | Organize media pool by resolution/codec, search, cleanup |
+| `metadata_manager.py` | Bulk manage, import/export metadata (CSV/JSON) |
+| `node_structure_analyzer.py` | Analyze and document node structures across clips |
 | `project_backup.py` | Automated project backup, restore, and retention management |
-| `clip_color_manager.py` | Manage, analyze, and bulk-modify clip colors in timeline/media pool |
+| `proxy_workflow_manager.py` | Proxy workflow management for offline/online editing |
+| `render_manager.py` | Render queue management with 7 built-in presets |
+| `smart_bin_organizer.py` | Intelligent bin organization with pattern matching |
+| `timeline_analyzer.py` | Analyze timeline statistics, LUT usage, clip distribution |
+| `timeline_comparison.py` | Compare two timelines and identify differences |
+| `timeline_export_import.py` | Export/import timeline data with clip information |
 
 ## 🎬 Detailed Usage Examples
 
@@ -307,6 +351,123 @@ python3 Scripts/Utilities/clip_color_manager.py --clear-color --dry-run
 # Work with timeline clips
 python3 Scripts/Utilities/clip_color_manager.py --timeline --stats
 python3 Scripts/Utilities/clip_color_manager.py --timeline --set-color Purple --search "b-roll"
+```
+
+### Color Grading Workflows
+
+**Apply professional cinematic looks:**
+```bash
+# List available looks
+python3 Scripts/ColorGrading/quick_look_presets.py --list-looks
+
+# Apply Netflix look to all clips
+python3 Scripts/ColorGrading/quick_look_presets.py --look netflix --all
+
+# Apply Teal & Orange to specific track
+python3 Scripts/ColorGrading/quick_look_presets.py --look teal-orange --track 1
+```
+
+**Adjust color temperature:**
+```bash
+# List temperature presets
+python3 Scripts/ColorGrading/color_temperature_adjuster.py --list-presets
+
+# Apply daylight preset to all clips
+python3 Scripts/ColorGrading/color_temperature_adjuster.py --preset daylight --all
+
+# Set custom temperature
+python3 Scripts/ColorGrading/color_temperature_adjuster.py --temperature 5600 --tint 0 --all
+```
+
+**Manage saturation:**
+```bash
+# Apply cinematic saturation preset
+python3 Scripts/ColorGrading/saturation_controller.py --preset cinematic --all
+
+# Set custom saturation value
+python3 Scripts/ColorGrading/saturation_controller.py --saturation 1.2 --track 1
+
+# Reset to neutral
+python3 Scripts/ColorGrading/saturation_controller.py --reset --all
+```
+
+**Export/Import CDL:**
+```bash
+# Export CDL from all clips
+python3 Scripts/ColorGrading/cdl_export_import.py --export grades.cdl --all
+
+# Import CDL to clips
+python3 Scripts/ColorGrading/cdl_export_import.py --import grades.cdl --all
+
+# Show CDL info
+python3 Scripts/ColorGrading/cdl_export_import.py --info --all
+```
+
+### Timeline & Workflow Tools
+
+**Generate shot lists:**
+```bash
+# Generate CSV shot list
+python3 "Scripts/Project Management/shot_list_generator.py" --output shots.csv --format csv
+
+# Generate detailed Markdown report
+python3 "Scripts/Project Management/shot_list_generator.py" --output report.md --format markdown --detailed
+
+# Summary only
+python3 "Scripts/Project Management/shot_list_generator.py" --summary
+```
+
+**Compare timelines:**
+```bash
+# Compare two timelines
+python3 Scripts/Utilities/conform_assistant.py --compare --timeline1 "Edit_v1" --timeline2 "Edit_v2"
+
+# Find missing media
+python3 Scripts/Utilities/conform_assistant.py --find-missing --output missing.txt
+
+# Generate conform report
+python3 Scripts/Utilities/conform_assistant.py --report conform.md
+```
+
+**Manage markers:**
+```bash
+# Add markers to all clips
+python3 Scripts/Utilities/marker_manager.py --add "Review Point" --all
+
+# Export markers to CSV
+python3 Scripts/Utilities/marker_manager.py --export markers.csv
+
+# Show marker statistics
+python3 Scripts/Utilities/marker_manager.py --stats
+```
+
+### Delivery & Quality Control
+
+**Generate deliverables checklist:**
+```bash
+# List available templates
+python3 "Scripts/Project Management/deliverables_checklist.py" --list-templates
+
+# Generate broadcast delivery checklist
+python3 "Scripts/Project Management/deliverables_checklist.py" --template broadcast --output checklist.md
+
+# Quick project status check
+python3 "Scripts/Project Management/deliverables_checklist.py" --quick-check
+```
+
+**Proxy workflow management:**
+```bash
+# Show proxy workflow guide
+python3 Scripts/Utilities/proxy_workflow_manager.py --workflow-guide
+
+# Check proxy status
+python3 Scripts/Utilities/proxy_workflow_manager.py --status --all
+
+# Check for missing proxies
+python3 Scripts/Utilities/proxy_workflow_manager.py --check-missing --all
+
+# Generate proxy report
+python3 Scripts/Utilities/proxy_workflow_manager.py --report proxies.csv
 ```
 
 ## 💡 Key Concepts
