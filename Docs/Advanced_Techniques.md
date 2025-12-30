@@ -344,15 +344,225 @@ C:\ProgramData\Blackmagic Design\DaVinci Resolve\Fusion\Config\
 
 **Workaround**: Use language-agnostic approaches (object types instead of menu names)
 
+## Media Pool Recursive Traversal
+
+### Problem
+
+Need to process all clips in media pool, including nested folders.
+
+### Solution: Recursive Folder Traversal
+
+```python
+def get_all_clips_recursive(folder):
+    """
+    Recursively get all clips from folder and subfolders.
+
+    Args:
+        folder: MediaPool Folder object
+
+    Returns:
+        List of all clips in folder tree
+    """
+    clips = []
+
+    # Get clips in current folder
+    clip_list = folder.GetClipList()
+    if clip_list:
+        clips.extend(clip_list)
+
+    # Recursively process subfolders
+    subfolders = folder.GetSubFolderList()
+    if subfolders:
+        for subfolder in subfolders:
+            clips.extend(get_all_clips_recursive(subfolder))
+
+    return clips
+
+# Usage
+mediapool = project.GetMediaPool()
+root_folder = mediapool.GetRootFolder()
+all_clips = get_all_clips_recursive(root_folder)
+
+print(f"Found {len(all_clips)} total clips")
+```
+
+### Bin Management Pattern
+
+```python
+def get_or_create_bin(mediapool, bin_name: str):
+    """
+    Get existing bin or create if doesn't exist.
+
+    Args:
+        mediapool: MediaPool object
+        bin_name: Name of bin to get or create
+
+    Returns:
+        Folder object
+    """
+    root_folder = mediapool.GetRootFolder()
+    subfolders = root_folder.GetSubFolderList()
+
+    # Search for existing bin
+    if subfolders:
+        for folder in subfolders:
+            if folder.GetName() == bin_name:
+                return folder
+
+    # Create new bin if not found
+    new_folder = mediapool.AddSubFolder(root_folder, bin_name)
+    if not new_folder:
+        raise Exception(f"Failed to create bin: {bin_name}")
+
+    return new_folder
+
+# Usage
+voice_bin = get_or_create_bin(mediapool, "Audio_Files")
+```
+
+### Process Clips by Metadata
+
+```python
+def get_clips_by_metadata(folder, key: str, value: str):
+    """
+    Get clips matching metadata criteria.
+
+    Args:
+        folder: Folder to search
+        key: Metadata key (e.g., "Camera Type", "Scene")
+        value: Value to match
+
+    Returns:
+        List of matching clips
+    """
+    matching_clips = []
+    all_clips = get_all_clips_recursive(folder)
+
+    for clip in all_clips:
+        metadata = clip.GetMetadata()
+        if metadata and metadata.get(key) == value:
+            matching_clips.append(clip)
+
+    return matching_clips
+
+# Example: Get all BRAW clips
+braw_clips = get_clips_by_metadata(
+    root_folder,
+    "Camera Type",
+    "Blackmagic RAW"
+)
+```
+
+## Type-Safe API Wrappers
+
+### Modern Python Wrapper Pattern
+
+For improved development experience, use type hints and property patterns:
+
+```python
+from typing import Literal, Optional
+
+class TimelineItemWrapper:
+    """Type-safe wrapper for TimelineItem."""
+
+    def __init__(self, timeline_item_obj):
+        self._obj = timeline_item_obj
+
+    @property
+    def name(self) -> str:
+        """Get clip name."""
+        return self._obj.GetName()
+
+    @name.setter
+    def name(self, value: str) -> None:
+        """Set clip name."""
+        self._obj.SetName(value)
+
+    def add_color_version(
+        self,
+        version_name: str,
+        version_type: Literal["local", "remote"] = "local"
+    ) -> bool:
+        """
+        Add color version with type safety.
+
+        Args:
+            version_name: Version name
+            version_type: "local" or "remote"
+
+        Returns:
+            True if successful
+        """
+        type_int = 0 if version_type == "local" else 1
+        return self._obj.AddVersion(version_name, type_int)
+
+    def set_lut(self, node_index: int, lut_path: str) -> bool:
+        """
+        Apply LUT to node.
+
+        Args:
+            node_index: Node index (1-based)
+            lut_path: LUT filename
+
+        Returns:
+            True if successful
+        """
+        return self._obj.SetLUT(node_index, lut_path)
+```
+
+See [Type Safety and Best Practices](Type_Safety_and_Best_Practices.md) for comprehensive guide.
+
 ## Resources and Credits
 
 These advanced techniques were discovered and documented by:
+
 - **hitsugi_yukana** - Extensive Fusion page scripting articles (Japanese)
   - [Context Menu Implementation](https://zenn.dev/hitsugi_yukana/articles/32a4463170c0d3)
   - [ComboBox String Retrieval](https://zenn.dev/hitsugi_yukana/articles/ef2c4067708d90)
   - [Inspector HTML Display](https://zenn.dev/hitsugi_yukana/articles/fusion_inspector_html)
   - [Control Change Handlers](https://zenn.dev/hitsugi_yukana/articles/hy_usercontrol_executeonchanged)
   - [Selected Timeline Items Workaround](https://zenn.dev/hitsugi_yukana/articles/hy_alternative_getselected-timelineitem)
+
+- **pedrolabonia/pydavinci** - Type-safe Python API wrapper
+  - [GitHub Repository](https://github.com/pedrolabonia/pydavinci)
+  - Full type hint coverage
+  - Pythonic property interface
+  - Enhanced color version management
+  - Render job monitoring patterns
+
+- **kayakfishingaddict** - Media pool traversal patterns
+  - [davinci-resolve-scripts](https://github.com/kayakfishingaddict/davinci-resolve-scripts)
+  - Recursive folder traversal
+  - Clip metadata processing
+
+## Recommended Libraries
+
+### pydavinci - Type-Safe API Wrapper
+
+For production scripts, consider using **pydavinci** for better developer experience:
+
+```bash
+pip install pydavinci
+```
+
+**Benefits**:
+- Full type hint coverage for IDE autocomplete
+- Pythonic properties (`timeline.name` instead of `timeline.GetName()`)
+- Enhanced error handling
+- Modern Python patterns
+
+**Example**:
+```python
+from pydavinci import davinci
+
+resolve = davinci.Resolve()
+project = resolve.project
+timeline = project.current_timeline
+
+# Type-safe color version management
+item = timeline.video_track(1).clips[0]
+item.add_color_version("Grade_v1", "local")  # IDE knows valid types
+```
 
 ## Future Improvements
 
@@ -361,3 +571,4 @@ Potential API additions to request from Blackmagic Design:
 - `timeline_item.AddNode()` - Programmatic node creation
 - `timeline_item.SetPrimaryWheels()` - Direct wheel control
 - Better cross-page scripting support
+- Type stub files (`.pyi`) for official API

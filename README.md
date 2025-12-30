@@ -114,6 +114,7 @@ Switch between versions in Resolve UI for instant comparison!
 - **[Best Practices](Docs/Best_Practices.md)** - Proven patterns and strategies
 - **[Limitations](Docs/Limitations.md)** - Known API limitations and workarounds
 - **[Advanced Techniques](Docs/Advanced_Techniques.md)** - Community-discovered workarounds and techniques
+- **[Type Safety & Best Practices](Docs/Type_Safety_and_Best_Practices.md)** - Modern Python patterns with type hints
 - **[Contributing](Docs/CONTRIBUTING.md)** - How to add knowledge to this repository
 
 ## 🔧 API Capabilities & Limitations
@@ -184,11 +185,21 @@ Contributions are welcome! Please feel free to:
 - [DaVinci Resolve Scripting README](file:///Library/Application%20Support/Blackmagic%20Design/DaVinci%20Resolve/Developer/Scripting/README.txt)
 - [Blackmagic Forum - Scripting](https://forum.blackmagicdesign.com/viewforum.php?f=21)
 
+### Recommended Libraries
+
+- **[pydavinci](https://github.com/pedrolabonia/pydavinci)** - Type-safe Python API wrapper
+  - Full type hint coverage for IDE autocomplete
+  - Pythonic property interface
+  - Enhanced error handling
+  - Modern Python patterns
+  - `pip install pydavinci`
+
 ### Community Resources
 
 - [extremraym - Unofficial API Docs](https://extremraym.com/cloud/resolve-scripting-doc/)
 - [X-Raym/DaVinci-Resolve-Scripts](https://github.com/X-Raym/DaVinci-Resolve-Scripts) - Lua script collection
-- [DaVinci Resolve 起動時スクリプト自動実行](https://zenn.dev/hitsugi_yukana/articles/536b36e1c97315) - Japanese guide
+- [hitsugi_yukana - Fusion Page Scripting](https://zenn.dev/hitsugi_yukana) - Japanese articles on Fusion scripting
+- [DaVinci Resolve 起動時スクリプト自動実行](https://zenn.dev/hitsugi_yukana/articles/536b36e1c97315) - Japanese startup script guide
 
 ## 📄 License
 

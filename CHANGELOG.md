@@ -15,14 +15,32 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
   - Track iteration patterns
   - Batch operations on filtered clips
   - Fusion vs Python API comparison
-  - Credits to hitsugi_yukana's research
+  - Media pool recursive traversal patterns
+  - Type-safe API wrapper examples
+  - Credits to hitsugi_yukana, pedrolabonia, kayakfishingaddict
+- Type_Safety_and_Best_Practices.md - Modern Python patterns
+  - Type hints for DaVinci Resolve API
+  - Property pattern implementation
+  - Custom exception handling
+  - Wrapper pattern best practices
+  - Render job monitoring with progress display
+  - pydavinci library integration guide
 
 ### Improved
 - cleanup_projects.py - プロジェクト一覧表示機能追加
   - 削除前に全プロジェクトリストを表示
   - スキップしたプロジェクト数を集計
   - より詳細な実行結果レポート
-- README.md - Added links to Advanced Techniques and Contributing guides
+- README.md - Documentation and resources updates
+  - Added Type Safety & Best Practices documentation link
+  - Added Recommended Libraries section (pydavinci)
+  - Enhanced Community Resources section
+- Advanced_Techniques.md - Enhanced with modern patterns
+  - Media pool recursive folder traversal
+  - Bin management (get or create pattern)
+  - Clip filtering by metadata
+  - Type-safe wrapper implementation example
+  - pydavinci library recommendation
 
 ## [1.0.0] - 2025-01-XX
 
