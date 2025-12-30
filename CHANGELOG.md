@@ -21,6 +21,13 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
   - Overwrite protection with --overwrite flag
   - Batch installation of multiple LUTs
   - Custom destination directory support
+- **Batch Grade Application** - Scripts/ColorGrading/batch_grade_apply.py
+  - Command-line batch grading tool
+  - Apply DRX templates, LUTs, and CDL to multiple clips
+  - Flexible clip targeting (all clips, specific track, by color)
+  - Combine multiple operations in single command
+  - Node-specific LUT/CDL application
+  - Support for all CDL parameters (Slope, Offset, Power, Saturation)
 - CONTRIBUTING.md - ナレッジ追加ガイドライン
 - GitHub Issue Template for knowledge additions
 - CHANGELOG.md for tracking changes

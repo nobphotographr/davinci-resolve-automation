@@ -104,7 +104,7 @@ python3 Scripts/ColorGrading/lut_comparison.py
 |--------|-------------|
 | `lut_comparison.py` | Create color versions for easy LUT A/B comparison |
 | `apply_drx_template.py` | Apply DRX node templates to clips |
-| `batch_lut_apply.py` | Apply LUTs to multiple clips at once |
+| `batch_grade_apply.py` | Batch apply DRX/LUT/CDL to multiple clips with flexible targeting |
 
 ### Project Management
 
