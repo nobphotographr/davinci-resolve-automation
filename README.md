@@ -119,6 +119,7 @@ python3 Scripts/ColorGrading/lut_comparison.py
 |--------|-------------|
 | `lut_installer.py` | Install custom LUTs to Resolve directory with auto-refresh |
 | `timeline_analyzer.py` | Analyze timeline statistics, LUT usage, and clip distribution |
+| `render_manager.py` | Manage render queue, add jobs with presets, monitor progress |
 
 ## 💡 Key Concepts
 

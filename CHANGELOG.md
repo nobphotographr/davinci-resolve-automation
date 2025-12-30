@@ -37,6 +37,14 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
   - Duration calculation with timecode formatting
   - Detailed per-clip information mode
   - JSON export for programmatic access
+- **Render Queue Manager** - Scripts/Utilities/render_manager.py
+  - View render queue status and job details
+  - Add render jobs with preset configurations
+  - 7 built-in presets (ProRes, H.264/H.265, DNxHR)
+  - Start rendering with progress monitoring
+  - Real-time progress display with ETA calculation
+  - Clear completed/failed jobs from queue
+  - Custom output directory support
 - CONTRIBUTING.md - ナレッジ追加ガイドライン
 - GitHub Issue Template for knowledge additions
 - CHANGELOG.md for tracking changes
