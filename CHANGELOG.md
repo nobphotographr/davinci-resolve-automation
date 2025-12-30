@@ -132,7 +132,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
   - Type-safe wrapper implementation example
   - pydavinci library recommendation
 
-## [1.0.0] - 2025-01-XX
+## [1.0.0] - 2025-12-30
 
 ### Added
 - Initial repository structure

@@ -446,13 +446,13 @@ python3 Scripts/ColorGrading/cdl_export_import.py --info --all
 **Generate shot lists:**
 ```bash
 # Generate CSV shot list
-python3 "Scripts/Project Management/shot_list_generator.py" --output shots.csv --format csv
+python3 Scripts/ProjectManagement/shot_list_generator.py --output shots.csv --format csv
 
 # Generate detailed Markdown report
-python3 "Scripts/Project Management/shot_list_generator.py" --output report.md --format markdown --detailed
+python3 Scripts/ProjectManagement/shot_list_generator.py --output report.md --format markdown --detailed
 
 # Summary only
-python3 "Scripts/Project Management/shot_list_generator.py" --summary
+python3 Scripts/ProjectManagement/shot_list_generator.py --summary
 ```
 
 **Compare timelines:**
@@ -484,13 +484,13 @@ python3 Scripts/Utilities/marker_manager.py --stats
 **Generate deliverables checklist:**
 ```bash
 # List available templates
-python3 "Scripts/Project Management/deliverables_checklist.py" --list-templates
+python3 Scripts/ProjectManagement/deliverables_checklist.py --list-templates
 
 # Generate broadcast delivery checklist
-python3 "Scripts/Project Management/deliverables_checklist.py" --template broadcast --output checklist.md
+python3 Scripts/ProjectManagement/deliverables_checklist.py --template broadcast --output checklist.md
 
 # Quick project status check
-python3 "Scripts/Project Management/deliverables_checklist.py" --quick-check
+python3 Scripts/ProjectManagement/deliverables_checklist.py --quick-check
 ```
 
 **Proxy workflow management:**
