@@ -28,6 +28,15 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
   - Combine multiple operations in single command
   - Node-specific LUT/CDL application
   - Support for all CDL parameters (Slope, Offset, Power, Saturation)
+- **Timeline Analyzer** - Scripts/Utilities/timeline_analyzer.py
+  - Comprehensive timeline statistics display
+  - Track structure analysis (video/audio track counts)
+  - Clip distribution by track and color
+  - LUT usage analysis (unique LUTs, usage count)
+  - Node statistics (max nodes, average nodes per clip)
+  - Duration calculation with timecode formatting
+  - Detailed per-clip information mode
+  - JSON export for programmatic access
 - CONTRIBUTING.md - ナレッジ追加ガイドライン
 - GitHub Issue Template for knowledge additions
 - CHANGELOG.md for tracking changes
