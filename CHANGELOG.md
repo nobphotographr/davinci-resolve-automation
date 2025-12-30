@@ -70,6 +70,14 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
   - Restore projects from backup files
   - Default backup location (~/DaVinci_Resolve_Backups)
   - Custom backup directory support
+- **Getting Started Tutorial** - Docs/Tutorials/Getting_Started_Tutorial.md
+  - Step-by-step beginner's guide
+  - Installation and setup instructions
+  - First script walkthrough (Timeline Analyzer)
+  - Practical workflows (batch grading, organization, backups)
+  - Advanced usage patterns (DRX templates, clip targeting)
+  - Common tasks reference table
+  - Tips for success
 - **Troubleshooting Guide** - Docs/Troubleshooting.md
   - Connection issues and solutions
   - Environment setup problems

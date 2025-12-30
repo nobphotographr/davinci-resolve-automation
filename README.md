@@ -309,12 +309,18 @@ Switch between versions in Resolve UI for instant comparison!
 
 ## 📖 Documentation
 
+### Tutorials
+- **[Getting Started Tutorial](Docs/Tutorials/Getting_Started_Tutorial.md)** - Complete beginner's guide 🚀
+
+### Reference
 - **[Troubleshooting](Docs/Troubleshooting.md)** - Common issues and solutions 🔧
 - **[API Reference](Docs/API_Reference.md)** - Complete API documentation
 - **[Best Practices](Docs/Best_Practices.md)** - Proven patterns and strategies
 - **[Limitations](Docs/Limitations.md)** - Known API limitations and workarounds
 - **[Advanced Techniques](Docs/Advanced_Techniques.md)** - Community-discovered workarounds and techniques
 - **[Type Safety & Best Practices](Docs/Type_Safety_and_Best_Practices.md)** - Modern Python patterns with type hints
+
+### Contributing
 - **[Contributing](Docs/CONTRIBUTING.md)** - How to add knowledge to this repository
 
 ## 🔧 API Capabilities & Limitations
