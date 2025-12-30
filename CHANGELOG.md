@@ -61,6 +61,15 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
   - Find clips by metadata values
   - Supports both MediaPoolItem and TimelineItem APIs
   - Common metadata fields (Scene, Shot, Take, Keywords, etc.)
+- **Project Backup Manager** - Scripts/Utilities/project_backup.py
+  - Automated project backup with timestamp naming
+  - Backup with notes/descriptions in filename
+  - List all available backups with size and date
+  - Automatic retention policy (keep N most recent)
+  - Clean old backups with dry-run mode
+  - Restore projects from backup files
+  - Default backup location (~/DaVinci_Resolve_Backups)
+  - Custom backup directory support
 - CONTRIBUTING.md - ナレッジ追加ガイドライン
 - GitHub Issue Template for knowledge additions
 - CHANGELOG.md for tracking changes

@@ -122,6 +122,7 @@ python3 Scripts/ColorGrading/lut_comparison.py
 | `render_manager.py` | Manage render queue, add jobs with presets, monitor progress |
 | `media_pool_organizer.py` | Organize media pool, analyze structure, search clips, cleanup |
 | `metadata_manager.py` | Bulk manage, import/export metadata for clips (CSV/JSON) |
+| `project_backup.py` | Automated project backup, restore, and retention management |
 
 ## 💡 Key Concepts
 
