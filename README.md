@@ -68,8 +68,13 @@ This repository contains practical Python scripts and documentation for automati
   - Creates project with proper settings (resolution, fps)
   - Imports and organizes media into bins (by time/resolution)
   - Applies color space transformations (Blackmagic Log → Rec.709)
-  - 3 color presets: Natural (YouTube/Vlog), Cinematic (Teal & Orange), Vivid (Instagram/SNS)
+  - 6 professional color presets with automatic CDL grading:
+    - Natural (YouTube/Vlog), Cinematic (Teal & Orange), Vivid (Instagram/SNS)
+    - Moody (Drama/Art), Warm Sunset (Travel/Lifestyle), Cool Modern (Tech/Business)
   - Timeline creation modes: empty, chronological, or skip
+  - Automatic color grading applied to all timeline clips
+  - Preview before execution with confirmation
+  - Comprehensive error handling and logging
   - Proxy generation setup with quality options
   - Perfect for beginners with detailed explanations at each step
 
@@ -219,8 +224,13 @@ python3 Scripts/ColorGrading/lut_comparison.py
 - Creates project with proper settings (resolution, fps)
 - Imports and organizes media into bins (by time/resolution)
 - Applies color space transformations (Blackmagic Log → Rec.709)
-- 3 color presets: Natural (YouTube/Vlog), Cinematic (Teal & Orange), Vivid (Instagram/SNS)
+- 6 professional color presets with automatic CDL application:
+  - Natural (YouTube/Vlog), Cinematic (Teal & Orange), Vivid (Instagram/SNS)
+  - Moody (Drama/Art), Warm Sunset (Travel/Lifestyle), Cool Modern (Tech/Business)
 - Timeline creation modes: empty, chronological, or skip
+- Automatic color grading applied to all timeline clips (CDL: Slope, Offset, Power, Saturation)
+- Preview before execution with user confirmation
+- Comprehensive error handling with detailed logging
 - Proxy generation setup with quality options
 
 ## 🎬 Detailed Usage Examples
@@ -513,22 +523,33 @@ python3 Scripts/Workflows/iphone_bmc_interactive.py
    - Time of day (Morning/Afternoon/Evening)
    - Resolution (4K/1080p/Other)
    - All in root folder
-4. **Applies color settings**:
-   - Natural: Blackmagic Log → Rec.709, perfect for YouTube/Vlogs
-   - Cinematic: Teal & Orange look with enhanced contrast
-   - Vivid: High saturation for Instagram/SNS
+4. **Applies color space transformation** and **automatic color grading**:
+   - Color space: Blackmagic Log → Rec.709
+   - 6 professional color presets with automatic CDL application:
+     - Natural: Clean, neutral look for YouTube/Vlogs
+     - Cinematic: Teal & Orange Hollywood look with dramatic contrast
+     - Vivid: High saturation and punchy colors for Instagram/SNS
+     - Moody: Low contrast, faded colors for Drama/Art
+     - Warm Sunset: Golden hour look for Travel/Lifestyle
+     - Cool Modern: Blue tones for Tech/Business
    - Custom: Use your own LUT file
-5. **Creates timeline**:
+   - CDL values (Slope, Offset, Power, Saturation) applied to all clips
+5. **Preview & Confirmation**:
+   - Shows complete preview of all settings before execution
+   - User confirmation required to proceed
+   - Detailed logging to file for troubleshooting
+6. **Creates timeline**:
    - Empty timeline for manual editing
    - Chronological timeline with all clips sorted
    - Skip to create timeline later
-6. **Sets up proxies** with half or quarter resolution options
+7. **Sets up proxies** with half or quarter resolution options
 
 **Perfect for:**
 - iPhone Blackmagic Camera users (ProRes, Log recording)
-- Beginners who want guided workflow
-- Quick project setup with proper color management
-- Vertical video creators (Instagram, TikTok)
+- Beginners who want guided workflow with automatic color grading
+- Quick project setup with professional color management
+- Vertical video creators (Instagram, TikTok, YouTube Shorts)
+- Content creators who need consistent looks across projects
 
 ## 💡 Key Concepts
 

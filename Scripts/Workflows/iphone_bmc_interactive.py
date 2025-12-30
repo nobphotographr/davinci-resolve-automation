@@ -35,6 +35,7 @@ License: MIT
 import sys
 import os
 import glob
+import logging
 from datetime import datetime
 from typing import List, Dict, Optional, Any, Tuple
 
@@ -42,6 +43,22 @@ from typing import List, Dict, Optional, Any, Tuple
 api_path = os.environ.get('RESOLVE_SCRIPT_API')
 if api_path:
     sys.path.append(os.path.join(api_path, "Modules"))
+
+# Setup logging
+def setup_logging(log_file: Optional[str] = None):
+    """Setup logging configuration."""
+    if log_file is None:
+        log_file = f"iphone_bmc_workflow_{datetime.now().strftime('%Y%m%d_%H%M%S')}.log"
+
+    logging.basicConfig(
+        level=logging.INFO,
+        format='%(asctime)s - %(levelname)s - %(message)s',
+        handlers=[
+            logging.FileHandler(log_file),
+            logging.StreamHandler(sys.stdout)
+        ]
+    )
+    return log_file
 
 
 # Color presets for iPhone BMC footage
@@ -54,6 +71,12 @@ COLOR_PRESETS = {
         'look': None,
         'saturation': 1.0,
         'contrast': 'natural',
+        'cdl': {
+            'slope': [1.0, 1.0, 1.0, 1.0],
+            'offset': [0.0, 0.0, 0.0, 0.0],
+            'power': [1.0, 1.0, 1.0, 1.0],
+            'saturation': 1.0
+        },
     },
     'cinematic': {
         'name': '🎬 映画調 (シネマティック)',
@@ -63,6 +86,12 @@ COLOR_PRESETS = {
         'look': 'teal-orange',
         'saturation': 1.1,
         'contrast': 'cinematic',
+        'cdl': {
+            'slope': [1.1, 0.98, 0.92, 1.0],
+            'offset': [0.02, 0.0, 0.05, 0.0],
+            'power': [0.9, 0.95, 1.05, 1.0],
+            'saturation': 1.15
+        },
     },
     'vivid': {
         'name': '🌈 鮮やか (Instagram/SNS向け)',
@@ -72,6 +101,57 @@ COLOR_PRESETS = {
         'look': None,
         'saturation': 1.3,
         'contrast': 'high',
+        'cdl': {
+            'slope': [1.15, 1.1, 1.05, 1.0],
+            'offset': [0.0, 0.0, 0.0, 0.0],
+            'power': [0.8, 0.85, 0.9, 1.0],
+            'saturation': 1.35
+        },
+    },
+    'moody': {
+        'name': '🌙 ムーディ (ドラマ・アート向け)',
+        'description': '低コントラスト、フェードした色、アーティスティック',
+        'input_color_space': 'Blackmagic Design',
+        'timeline_color_space': 'Rec.709',
+        'look': 'moody',
+        'saturation': 0.85,
+        'contrast': 'low',
+        'cdl': {
+            'slope': [0.95, 0.95, 0.95, 1.0],
+            'offset': [0.08, 0.08, 0.08, 0.0],
+            'power': [1.1, 1.1, 1.1, 1.0],
+            'saturation': 0.85
+        },
+    },
+    'warm-sunset': {
+        'name': '🌅 温かい夕焼け (旅行・ライフスタイル向け)',
+        'description': '温かみのあるトーン、ゴールデンアワー風',
+        'input_color_space': 'Blackmagic Design',
+        'timeline_color_space': 'Rec.709',
+        'look': 'warm',
+        'saturation': 1.1,
+        'contrast': 'medium',
+        'cdl': {
+            'slope': [1.08, 1.0, 0.95, 1.0],
+            'offset': [0.03, 0.01, 0.0, 0.0],
+            'power': [0.95, 1.0, 1.05, 1.0],
+            'saturation': 1.12
+        },
+    },
+    'cool-modern': {
+        'name': '❄️ クール&モダン (テック・ビジネス向け)',
+        'description': 'クールなブルートーン、現代的',
+        'input_color_space': 'Blackmagic Design',
+        'timeline_color_space': 'Rec.709',
+        'look': 'cool',
+        'saturation': 1.05,
+        'contrast': 'medium-high',
+        'cdl': {
+            'slope': [0.95, 1.0, 1.08, 1.0],
+            'offset': [0.0, 0.01, 0.03, 0.0],
+            'power': [1.0, 0.98, 0.95, 1.0],
+            'saturation': 1.05
+        },
     },
 }
 
@@ -450,6 +530,49 @@ def step_6_proxy_settings() -> Dict[str, Any]:
         return {'generate': False}
 
 
+def show_preview(settings: Dict[str, Any]):
+    """Show preview of what will be done."""
+    print()
+    print_divider()
+    print("👀 プレビュー - 以下の処理を実行します")
+    print_divider()
+    print()
+    print(f"📂 プロジェクト名: {settings.get('project_name', 'N/A')}")
+    print(f"📐 解像度: {settings.get('width', 'N/A')}x{settings.get('height', 'N/A')}")
+    print(f"🎬 フレームレート: {settings.get('fps', 'N/A')}fps")
+    print()
+    print(f"📁 メディアソース: {settings.get('media_path', 'N/A')}")
+    print(f"📊 クリップ数: {settings.get('file_count', 0)}ファイル")
+    print()
+
+    preset_key = settings.get('color_preset', '')
+    if preset_key and not preset_key.startswith('custom:'):
+        preset = COLOR_PRESETS.get(preset_key)
+        if preset:
+            print(f"🎨 カラープリセット: {preset['name']}")
+            print(f"   {preset['description']}")
+    elif preset_key.startswith('custom:'):
+        print(f"🎨 カスタムLUT: {preset_key[7:]}")
+    print()
+
+    org_mode = settings.get('organization', 'root')
+    org_names = {'time': '撮影時刻別', 'resolution': '解像度別', 'root': 'ルートフォルダ'}
+    print(f"📂 メディア整理: {org_names.get(org_mode, org_mode)}")
+    print()
+
+    timeline_mode = settings.get('timeline_mode', 'skip')
+    timeline_names = {'empty': '空のタイムライン', 'chronological': '時系列順タイムライン', 'skip': 'スキップ'}
+    print(f"⏱️  タイムライン: {timeline_names.get(timeline_mode, timeline_mode)}")
+
+    if settings.get('proxy', {}).get('generate'):
+        quality = settings['proxy']['quality']
+        print(f"🚀 プロキシ: {quality} resolution")
+
+    print()
+    print_divider()
+    print()
+
+
 def step_7_summary(settings: Dict[str, Any]):
     """Step 7: Show summary and complete."""
     print_step(7, 7, "完了")
@@ -653,6 +776,70 @@ def apply_color_preset(project, items: Dict[str, List[Any]], preset_key: str):
     print("  ✅ カラー設定を適用しました")
 
 
+def apply_cdl_to_timeline_clips(project, timeline, preset_key: str) -> bool:
+    """
+    Apply CDL color grading to all clips in timeline.
+
+    Args:
+        project: Project object
+        timeline: Timeline object
+        preset_key: Preset key
+
+    Returns:
+        True if successful
+    """
+    if preset_key.startswith('custom:'):
+        return False
+
+    preset = COLOR_PRESETS.get(preset_key)
+    if not preset or 'cdl' not in preset:
+        return False
+
+    print()
+    print("🎨 カラーグレーディングを適用中...")
+    print(f"  プリセット: {preset['name']}")
+
+    cdl = preset['cdl']
+
+    # Get all video tracks
+    video_track_count = timeline.GetTrackCount('video')
+    clips_processed = 0
+
+    for track_index in range(1, video_track_count + 1):
+        items = timeline.GetItemListInTrack('video', track_index)
+
+        if not items:
+            continue
+
+        for item in items:
+            try:
+                # Apply CDL values
+                item.SetProperty('ColorSlopeR', str(cdl['slope'][0]))
+                item.SetProperty('ColorSlopeG', str(cdl['slope'][1]))
+                item.SetProperty('ColorSlopeB', str(cdl['slope'][2]))
+
+                item.SetProperty('ColorOffsetR', str(cdl['offset'][0]))
+                item.SetProperty('ColorOffsetG', str(cdl['offset'][1]))
+                item.SetProperty('ColorOffsetB', str(cdl['offset'][2]))
+
+                item.SetProperty('ColorPowerR', str(cdl['power'][0]))
+                item.SetProperty('ColorPowerG', str(cdl['power'][1]))
+                item.SetProperty('ColorPowerB', str(cdl['power'][2]))
+
+                item.SetProperty('ColorSaturation', str(cdl['saturation']))
+
+                clips_processed += 1
+            except Exception as e:
+                print(f"  ⚠️  クリップ {item.GetName()} への適用に失敗: {e}")
+
+    if clips_processed > 0:
+        print(f"  ✅ {clips_processed}クリップにカラーグレーディングを適用しました")
+        return True
+    else:
+        print("  ⚠️  カラーグレーディングの適用に失敗しました")
+        return False
+
+
 def create_timeline(project, settings: Dict[str, Any], items: Dict[str, List[Any]]) -> Any:
     """
     Create timeline based on settings.
@@ -760,12 +947,20 @@ def generate_proxies(project, items: Dict[str, List[Any]], quality: str):
 
 def main():
     """Main interactive workflow."""
+    # Setup logging
+    log_file = setup_logging()
+
     print_header("📱 iPhone Blackmagic Camera ワークフロー アシスタント")
 
     print("このツールは、iPhone Blackmagic Cameraで撮影した映像を")
     print("DaVinci Resolveで編集するための完全ガイドです。")
     print()
     print("各ステップで丁寧に説明しながら進めます。")
+    print()
+    print(f"📝 ログファイル: {log_file}")
+    print()
+
+    logging.info("=== iPhone BMC Workflow Started ===")
 
     # Check DaVinci Resolve connection
     try:
@@ -776,46 +971,98 @@ def main():
             print()
             print("⚠️  DaVinci Resolveに接続できません")
             print("   DaVinci Resolveを起動してから、もう一度実行してください")
+            logging.error("Failed to connect to DaVinci Resolve")
             sys.exit(1)
 
-        print()
         print("✅ DaVinci Resolveに接続しました")
+        logging.info("Successfully connected to DaVinci Resolve")
 
-    except ImportError:
+    except ImportError as e:
         print()
         print("⚠️  DaVinci Resolve Python APIが利用できません")
         print("   環境変数を確認してください")
+        logging.error(f"Failed to import DaVinci Resolve API: {e}")
+        sys.exit(1)
+    except Exception as e:
+        print()
+        print(f"⚠️  予期しないエラーが発生しました: {e}")
+        logging.error(f"Unexpected error during initialization: {e}")
         sys.exit(1)
 
     # Collect settings through interactive steps
     settings = {}
 
     # Step 1: Select media
-    media_path, files = step_1_select_media()
-    settings['media_path'] = media_path
-    settings['files'] = files
-    settings['file_count'] = len(files)
+    try:
+        media_path, files = step_1_select_media()
+        settings['media_path'] = media_path
+        settings['files'] = files
+        settings['file_count'] = len(files)
+        logging.info(f"Media selected: {media_path} ({len(files)} files)")
+    except Exception as e:
+        logging.error(f"Error in Step 1 (Media Selection): {e}")
+        print(f"\n❌ エラー: メディアの選択に失敗しました - {e}")
+        sys.exit(1)
 
     # Step 2: Project settings
-    project_settings = step_2_project_settings()
-    settings.update(project_settings)
-    settings['project_name'] = project_settings['name']
+    try:
+        project_settings = step_2_project_settings()
+        settings.update(project_settings)
+        settings['project_name'] = project_settings['name']
+        logging.info(f"Project settings: {project_settings}")
+    except Exception as e:
+        logging.error(f"Error in Step 2 (Project Settings): {e}")
+        print(f"\n❌ エラー: プロジェクト設定に失敗しました - {e}")
+        sys.exit(1)
 
     # Step 3: Color settings
-    color_preset = step_3_color_settings()
-    settings['color_preset'] = color_preset
+    try:
+        color_preset = step_3_color_settings()
+        settings['color_preset'] = color_preset
+        logging.info(f"Color preset selected: {color_preset}")
+    except Exception as e:
+        logging.error(f"Error in Step 3 (Color Settings): {e}")
+        print(f"\n❌ エラー: カラー設定に失敗しました - {e}")
+        sys.exit(1)
 
     # Step 4: Media organization
-    organization = step_4_media_organization(len(files))
-    settings['organization'] = organization
+    try:
+        organization = step_4_media_organization(len(files))
+        settings['organization'] = organization
+        logging.info(f"Organization mode: {organization}")
+    except Exception as e:
+        logging.error(f"Error in Step 4 (Media Organization): {e}")
+        print(f"\n❌ エラー: メディア整理設定に失敗しました - {e}")
+        sys.exit(1)
 
     # Step 5: Timeline creation
-    timeline_mode = step_5_timeline_creation()
-    settings['timeline_mode'] = timeline_mode
+    try:
+        timeline_mode = step_5_timeline_creation()
+        settings['timeline_mode'] = timeline_mode
+        logging.info(f"Timeline mode: {timeline_mode}")
+    except Exception as e:
+        logging.error(f"Error in Step 5 (Timeline Creation): {e}")
+        print(f"\n❌ エラー: タイムライン設定に失敗しました - {e}")
+        sys.exit(1)
 
     # Step 6: Proxy settings
-    proxy_settings = step_6_proxy_settings()
-    settings['proxy'] = proxy_settings
+    try:
+        proxy_settings = step_6_proxy_settings()
+        settings['proxy'] = proxy_settings
+        logging.info(f"Proxy settings: {proxy_settings}")
+    except Exception as e:
+        logging.error(f"Error in Step 6 (Proxy Settings): {e}")
+        print(f"\n❌ エラー: プロキシ設定に失敗しました - {e}")
+        sys.exit(1)
+
+    # Show preview and confirm
+    show_preview(settings)
+
+    if not get_yes_no("この設定で実行してよろしいですか？", default=True):
+        print()
+        print("❌ ユーザーによってキャンセルされました")
+        logging.info("Workflow cancelled by user")
+        sys.exit(0)
 
     # Execute automation
     print()
@@ -859,11 +1106,9 @@ def main():
         timeline = create_timeline(project, settings, imported_items)
 
         if timeline:
-            # Apply color preset to timeline if it's a look-based preset
+            # Apply color grading to timeline clips
             if not settings['color_preset'].startswith('custom:'):
-                preset = COLOR_PRESETS.get(settings['color_preset'])
-                if preset and preset.get('look'):
-                    print(f"  💡 Look '{preset['look']}' の適用はColorページで行ってください")
+                apply_cdl_to_timeline_clips(project, timeline, settings['color_preset'])
 
     # Generate proxies (shows instructions)
     if settings.get('proxy', {}).get('generate'):
