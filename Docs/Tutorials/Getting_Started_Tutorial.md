@@ -304,20 +304,143 @@ python3 Scripts/ColorGrading/batch_grade_apply.py \
   --track 1
 ```
 
+## Professional Color Grading Workflows
+
+### Quick Look Presets
+
+Apply professional cinematic looks instantly:
+
+```bash
+# List available looks
+python3 Scripts/ColorGrading/quick_look_presets.py --list-looks
+
+# Apply Netflix look to all clips
+python3 Scripts/ColorGrading/quick_look_presets.py --look netflix --all
+
+# Apply Teal & Orange to track 1
+python3 Scripts/ColorGrading/quick_look_presets.py --look teal-orange --track 1
+```
+
+Available looks:
+- Netflix Look
+- ARRI Alexa Look
+- Cinematic Teal & Orange
+- Kodak Vision3 5219
+- Documentary Style
+- Music Video Look
+- Bleach Bypass
+- Vintage Film
+
+### Color Temperature Adjustment
+
+Batch adjust white balance:
+
+```bash
+# List temperature presets
+python3 Scripts/ColorGrading/color_temperature_adjuster.py --list-presets
+
+# Apply daylight preset
+python3 Scripts/ColorGrading/color_temperature_adjuster.py --preset daylight --all
+
+# Set custom temperature (5600K, neutral tint)
+python3 Scripts/ColorGrading/color_temperature_adjuster.py --temperature 5600 --tint 0 --all
+```
+
+### Saturation Control
+
+Manage saturation across clips:
+
+```bash
+# Apply cinematic saturation
+python3 Scripts/ColorGrading/saturation_controller.py --preset cinematic --all
+
+# Set specific value
+python3 Scripts/ColorGrading/saturation_controller.py --saturation 1.2 --track 1
+
+# Reset to neutral
+python3 Scripts/ColorGrading/saturation_controller.py --reset --all
+```
+
+## Production & Delivery Workflows
+
+### Generate Shot Lists
+
+Create professional shot lists for production:
+
+```bash
+# Generate CSV shot list
+python3 "Scripts/Project Management/shot_list_generator.py" --output shots.csv --format csv
+
+# Generate detailed Markdown report
+python3 "Scripts/Project Management/shot_list_generator.py" --output report.md --format markdown --detailed
+```
+
+### Deliverables Checklist
+
+Generate delivery checklists:
+
+```bash
+# List available templates
+python3 "Scripts/Project Management/deliverables_checklist.py" --list-templates
+
+# Generate broadcast delivery checklist
+python3 "Scripts/Project Management/deliverables_checklist.py" --template broadcast --output checklist.md
+
+# Quick project status
+python3 "Scripts/Project Management/deliverables_checklist.py" --quick-check
+```
+
+Templates available:
+- **Broadcast**: TV/broadcast delivery (EBU R128, legal levels)
+- **Web**: Social media/web delivery (platform-specific)
+- **Cinema**: DCP delivery (P3-D65, 5.1 audio)
+- **Archive**: Master/archive delivery (lossless, backups)
+
+### Timeline Comparison & Conform
+
+Compare different versions:
+
+```bash
+# Compare two timelines
+python3 Scripts/Utilities/conform_assistant.py --compare --timeline1 "Edit_v1" --timeline2 "Edit_v2"
+
+# Find missing media
+python3 Scripts/Utilities/conform_assistant.py --find-missing --output missing.txt
+
+# Generate conform report
+python3 Scripts/Utilities/conform_assistant.py --report conform.md
+```
+
 ## Common Tasks Reference
 
 Quick reference for daily tasks:
 
 | Task | Command |
 |------|---------|
+| **Project Management** |
 | Backup project | `python3 Scripts/Utilities/project_backup.py --backup` |
 | List backups | `python3 Scripts/Utilities/project_backup.py --list` |
+| Generate shot list | `python3 "Scripts/Project Management/shot_list_generator.py" --output shots.csv --format csv` |
+| Deliverables checklist | `python3 "Scripts/Project Management/deliverables_checklist.py" --template broadcast --output checklist.md` |
+| **Color Grading** |
+| Apply cinematic look | `python3 Scripts/ColorGrading/quick_look_presets.py --look netflix --all` |
+| Adjust white balance | `python3 Scripts/ColorGrading/color_temperature_adjuster.py --preset daylight --all` |
+| Control saturation | `python3 Scripts/ColorGrading/saturation_controller.py --preset cinematic --all` |
 | Install LUT | `python3 Scripts/Utilities/lut_installer.py my_lut.cube` |
 | Apply LUT to track | `python3 Scripts/ColorGrading/batch_grade_apply.py --lut my_lut.cube --node 4 --track 1` |
+| Export CDL | `python3 Scripts/ColorGrading/cdl_export_import.py --export grades.cdl --all` |
+| **Timeline & Analysis** |
 | Analyze timeline | `python3 Scripts/Utilities/timeline_analyzer.py` |
+| Compare timelines | `python3 Scripts/Utilities/conform_assistant.py --compare --timeline1 "v1" --timeline2 "v2"` |
 | Media pool stats | `python3 Scripts/Utilities/media_pool_organizer.py --stats` |
 | Export metadata | `python3 Scripts/Utilities/metadata_manager.py --export metadata.csv` |
+| **Rendering** |
 | Add render job | `python3 Scripts/Utilities/render_manager.py --add --preset prores422hq` |
+| Monitor render | `python3 Scripts/Utilities/render_manager.py --start --monitor` |
+| **Workflow Tools** |
+| Check proxy status | `python3 Scripts/Utilities/proxy_workflow_manager.py --status --all` |
+| Manage markers | `python3 Scripts/Utilities/marker_manager.py --export markers.csv` |
+| Audio sync helper | `python3 Scripts/Utilities/audio_sync_helper.py --auto-sync --all` |
 
 ## Tips for Success
 
