@@ -14,6 +14,13 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
   - Sample LUT installation
   - Python and DaVinci Resolve API verification
   - Connection test to running DaVinci Resolve instance
+- **LUT Installer** - Scripts/Utilities/lut_installer.py
+  - Cross-platform LUT installation (macOS/Windows/Linux)
+  - Support for .cube, .3dl, and .lut formats
+  - Automatic LUT list refresh in DaVinci Resolve
+  - Overwrite protection with --overwrite flag
+  - Batch installation of multiple LUTs
+  - Custom destination directory support
 - CONTRIBUTING.md - ナレッジ追加ガイドライン
 - GitHub Issue Template for knowledge additions
 - CHANGELOG.md for tracking changes
